@@ -6,3 +6,7 @@ export type projectType = {
   categoria: string;
 }
 
+export type getCategoriasApiRes = {
+  id: string;
+  name: string;
+}

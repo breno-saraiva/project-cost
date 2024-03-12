@@ -2,39 +2,32 @@ import Select from "../components/select";
 import { Input } from "../components/input";
 import { SubmitButton } from "../components/button";
 import { FormEvent, useEffect, useState } from "react";
-import { projectProps } from "..";
+import { createProject } from "../../../api/createProject";
+import { getCategorias } from "../../../api/getCategorias";
+import { getCategoriasApiRes } from "../../../types";
 
-type ProjectFormProps = {
-  createPost: (project: projectProps) => void;
-};
-const ProjectForm = ({ createPost }: ProjectFormProps) => {
-  const [categories, setCategories] = useState([]);
+const ProjectForm = () => {
+  const [categories, setCategories] = useState<getCategoriasApiRes[]>([]);
 
-  useEffect(() => {
-    fetch("http://localhost:5000/categories", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setCategories(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  function onSubmitHandle(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(
-      (e.currentTarget.elements.namedItem("name") as HTMLInputElement).value
-    );
-    //   const nome = e.currentTarget
-    //       createPost()
+    const nome = e.target[0].value;
+    const orcamento = e.target[1].value;
+    const categoria = e.target[2].value;
+
+    await createProject({ categoria, nome, orcamento });
   }
 
+  useEffect(() => {
+    const getCategories = async () => {
+      const categorias = await getCategorias();
+      setCategories(categorias);
+    };
+    getCategories();
+  }, []);
+
   return (
-    <form onSubmit={onSubmitHandle} className="w-full flex flex-col py-8 px-0">
+    <form onSubmit={handleSubmit} className="w-full flex flex-col py-8 px-0">
       <div>
         <Input
           type="text"

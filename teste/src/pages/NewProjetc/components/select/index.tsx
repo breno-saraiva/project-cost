@@ -20,7 +20,7 @@ const Select: React.FC<SelectProps> = ({ text, name, options, value }) => {
         className="p-[.7em] rounded-none border-none text-[#7b7b7b]"
       >
         {options?.map(({ id, name }) => (
-          <option value={id} key={id}>
+          <option value={name} key={id}>
             {name}
           </option>
         ))}
