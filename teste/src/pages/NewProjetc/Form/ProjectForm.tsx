@@ -8,12 +8,15 @@ import { getCategoriasApiRes } from "../../../types";
 
 const ProjectForm = () => {
   const [categories, setCategories] = useState<getCategoriasApiRes[]>([]);
+  const [name, setName] = useState("");
+  const [cost, setCost] = useState("");
+  const [categorie, setCategorie] = useState("");
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const nome = e.target[0].value;
-    const orcamento = e.target[1].value;
-    const categoria = e.target[2].value;
+    const nome = name;
+    const orcamento = cost;
+    const categoria = categorie;
 
     await createProject({ categoria, nome, orcamento });
   }
@@ -33,6 +36,7 @@ const ProjectForm = () => {
           type="text"
           text="nome do projeto"
           name="name"
+          handleOnChange={(e) => setName(e.target.value)}
           placeholder="Insira o nome do projeto"
         />
       </div>
@@ -41,12 +45,14 @@ const ProjectForm = () => {
           type="number"
           text="Orçamento do Projeto"
           name="budget"
+          handleOnChange={(e) => setCost(e.target.value)}
           placeholder="Insira o orçamento total"
         />
       </div>
       <Select
         name="category"
         text="Selecione a Categoria"
+        handlechange={(e) => setCategorie(e.target.value)}
         options={categories}
       />
       <SubmitButton type="submit" text="criar projeto" />

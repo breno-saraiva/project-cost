@@ -15,7 +15,7 @@ function Home() {
         <p className="mb-6 text-[#7b7b7b]">
           comece a gerenciar aos seus projetos agora mesmo!
         </p>
-        <Linkbutton to="/newproject" text="Criar projeto" />
+        <Linkbutton to="/newProject" text="Criar projeto" />
         <img src={savings} alt="Costs" className="w-[350px] my-8 mx-0" />
       </section>
       <Footer />

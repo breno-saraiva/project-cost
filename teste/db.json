@@ -23,6 +23,12 @@
       "categoria": "Planejamento",
       "nome": "lorin é bom",
       "orcamento": "69696969"
+    },
+    {
+      "id": "e7e8",
+      "categoria": "Planejamento",
+      "nome": "project test",
+      "orcamento": "3000"
     }
   ],
   "categories": [
