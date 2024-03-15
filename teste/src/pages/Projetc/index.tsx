@@ -1,8 +1,20 @@
 import Navbar from "../../components/navbar";
 import Footer from "../../components/Footer";
 import { Linkbutton } from "../Home/components/LinkButton";
+import { CardProject } from "./components/cardProject";
+import { useState, useEffect } from "react";
+import { getListProject, listProjectProps } from "../../api/listProjects";
 
 function Project() {
+  const [projects, setProjects] = useState<listProjectProps[]>([]);
+
+  useEffect(() => {
+    const getList = async () => {
+      const list = await getListProject();
+      setProjects(list);
+    };
+    getList();
+  });
   return (
     <div>
       <Navbar />
@@ -10,8 +22,18 @@ function Project() {
         <h1 className="mb-4 text-5xl font-sans font-bold">Meus Projetos</h1>
         <Linkbutton to="/newProject" text="Criar projeto" />
       </div>
-      <div className="h-full px-16">
+      <div className="px-16">
         <p>Projetos</p>
+        {projects.length > 0 &&
+          projects.map((project) => (
+            <CardProject
+              id={project.id}
+              name={project.nome}
+              budget={project.orcamento}
+              category={project.categoria}
+              key={project.id}
+            />
+          ))}
       </div>
       <Footer />
     </div>

@@ -1,12 +1,12 @@
 import React from "react";
 
-interface SelectProps {
+type SelectProps = {
   text?: string;
   name?: string;
   options?: { id: string; name: string }[];
   value?: string;
   handlechange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-}
+};
 
 const Select: React.FC<SelectProps> = ({
   text,
