@@ -1,4 +1,6 @@
-import { BsPencil, BsFillTrashFill } from "react-icons/bs";
+import { FaTrashCan } from "react-icons/fa6";
+import { HiOutlinePencilAlt } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 type cardProjectProps = {
   id?: string;
@@ -9,26 +11,31 @@ type cardProjectProps = {
 };
 
 const CardProject: React.FC<cardProjectProps> = ({
-  id,
+  // id,
   nome,
   categoria,
   orcamento,
-  handleRemove,
+  // handleRemove,
 }) => {
   return (
-    <div className="p-4 border-solid bg-[#7a7a7a] rounded-md w-[24%] m-[.5%]">
-      <h4 className="bg-[#222] text-[#ffbb33] text-sm p-2 mb-5 size-5">
+    <div className="p-4 outline outline-1 outline-[#7a7a7a] rounded-md w-[24%] m-[0.5%]">
+      <h4 className="bg-[#222] text-[#ffbb33] text-lg p-2 mb-5 rounded-md font-semibold">
         {nome}
       </h4>
-      <p>
-        <span>Orçamento:</span> R${orcamento}
+      <p className="text-[#7a7a7a] mb-4 flex items-center">
+        <span className="font-bold block">Orçamento: </span> R$
+        {orcamento}
       </p>
-      <p>
-        <span></span> {categoria}
+      <p className="text-[#7a7a7a] mb-4 flex items-center">
+        <span className="font-bold block">Categoria: </span> {categoria}
       </p>
-      <div>
-        <p>editar</p>
-        <p>remover</p>
+      <div className="flex justify-between items-center mt-5">
+        <Link to="/" className="text-xl">
+          <HiOutlinePencilAlt />
+        </Link>
+        <button>
+          <FaTrashCan />
+        </button>
       </div>
     </div>
   );

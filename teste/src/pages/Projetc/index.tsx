@@ -23,17 +23,19 @@ function Project() {
         <Linkbutton to="/newProject" text="Criar projeto" />
       </div>
       <div className="px-16">
-        <p>Projetos</p>
-        {projects.length > 0 &&
-          projects.map((project) => (
-            <CardProject
-              id={project.id}
-              name={project.nome}
-              budget={project.orcamento}
-              category={project.categoria}
-              key={project.id}
-            />
-          ))}
+        <p className="font-sans text-3xl mb-3">Projetos</p>
+        <div className="flex flex-wrap">
+          {projects.length > 0 &&
+            projects.map((project) => (
+              <CardProject
+                id={project.id}
+                nome={project.nome}
+                orcamento={project.orcamento}
+                categoria={project.categoria}
+                key={project.id}
+              />
+            ))}
+        </div>
       </div>
       <Footer />
     </div>

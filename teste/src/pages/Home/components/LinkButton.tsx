@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 interface LinkbuttonProps {
   to: string;
-  text: string;
+  text?: string;
 }
 
 function Linkbutton({ to, text }: LinkbuttonProps) {
