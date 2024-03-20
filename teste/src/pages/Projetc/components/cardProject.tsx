@@ -7,7 +7,7 @@ type cardProjectProps = {
   nome?: string;
   orcamento?: string;
   categoria?: string;
-  handleRemove?: string;
+  handleRemove?: () => void;
 };
 
 const CardProject: React.FC<cardProjectProps> = ({
@@ -15,7 +15,7 @@ const CardProject: React.FC<cardProjectProps> = ({
   nome,
   categoria,
   orcamento,
-  // handleRemove,
+  handleRemove,
 }) => {
   return (
     <div className="p-4 outline outline-1 outline-[#7a7a7a] rounded-md w-[24%] m-[0.5%]">
@@ -34,7 +34,7 @@ const CardProject: React.FC<cardProjectProps> = ({
           <HiOutlinePencilAlt />
         </Link>
         <button>
-          <FaTrashCan />
+          <FaTrashCan onClick={handleRemove} />
         </button>
       </div>
     </div>

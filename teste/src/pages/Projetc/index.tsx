@@ -4,6 +4,8 @@ import { Linkbutton } from "../Home/components/LinkButton";
 import { CardProject } from "./components/cardProject";
 import { useState, useEffect } from "react";
 import { getListProject, listProjectProps } from "../../api/listProjects";
+import { removeProjectProps } from "../../types";
+import { project } from "./routes/index.routes";
 
 function Project() {
   const [projects, setProjects] = useState<listProjectProps[]>([]);
@@ -15,6 +17,21 @@ function Project() {
     };
     getList();
   });
+
+  function deleteItem(id: removeProjectProps) {
+    fetch(`http://localhost:5000/projects${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((resp) => resp.json)
+      .then((data) => {
+        setProjects(projects.filter((project) => project.id !== id));
+      })
+      .catch((err) => console.log(err));
+  }
+
   return (
     <div>
       <Navbar />
@@ -33,6 +50,7 @@ function Project() {
                 orcamento={project.orcamento}
                 categoria={project.categoria}
                 key={project.id}
+                handleRemove={deleteItem}
               />
             ))}
         </div>

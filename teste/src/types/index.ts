@@ -8,3 +8,7 @@ export type getCategoriasApiRes = {
   id: string;
   name: string;
 };
+
+export type removeProjectProps = {
+  id: string;
+};
