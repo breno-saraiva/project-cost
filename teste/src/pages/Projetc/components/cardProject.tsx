@@ -35,7 +35,7 @@ const CardProject: React.FC<cardProjectProps> = ({
         <span className="font-bold block">Categoria: </span> {categoria}
       </p>
       <div className="flex justify-between items-center mt-5">
-        <Link to="/" className="text-xl">
+        <Link to="/projectEdit" className="text-xl">
           <HiOutlinePencilAlt />
         </Link>
         <button onClick={handleDelete}>

@@ -16,8 +16,8 @@ function Project() {
     getList();
   });
 
-  function deleteItem(id: string) {
-    fetch(`http://localhost:5000/projects/${id}`, {
+  async function deleteItem(id: string) {
+    await fetch(`http://localhost:5000/projects/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

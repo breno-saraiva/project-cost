@@ -4,6 +4,7 @@ import { empresas } from "../pages/Empresas/routes/index.routes";
 import { newProject } from "../pages/NewProjetc/routes/index.routes";
 import { contato } from "../pages/Contato/routes/index.routes";
 import { project } from "../pages/Projetc/routes/index.routes";
+import { projectEdit } from "../pages/ProjectEdit/routes/index.routes";
 
 const router = createBrowserRouter([
   ...homePage,
@@ -11,6 +12,7 @@ const router = createBrowserRouter([
   ...newProject,
   ...contato,
   ...project,
+  ...projectEdit,
 ]);
 
 export { router };
