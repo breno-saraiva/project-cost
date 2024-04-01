@@ -9,12 +9,17 @@ function Project() {
   const [projects, setProjects] = useState<listProjectProps[]>([]);
 
   useEffect(() => {
-    const getList = async () => {
+    getList();
+  }, []);
+
+  async function getList() {
+    try {
       const list = await getListProject();
       setProjects(list);
-    };
-    getList();
-  });
+    } catch {
+      console.log("error");
+    }
+  }
 
   async function deleteItem(id: string) {
     await fetch(`http://localhost:5000/projects/${id}`, {
