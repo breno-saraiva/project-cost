@@ -13,12 +13,8 @@ function Project() {
   }, []);
 
   async function getList() {
-    try {
-      const list = await getListProject();
-      setProjects(list);
-    } catch {
-      console.log("error");
-    }
+    const list = await getListProject();
+    setProjects(list);
   }
 
   async function deleteItem(id: string) {

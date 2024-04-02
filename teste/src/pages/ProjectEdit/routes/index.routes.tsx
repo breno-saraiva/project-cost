@@ -3,7 +3,7 @@ import ProjectEdit from "..";
 
 const projectEdit: RouteObject[] = [
   {
-    path: "/projectEdit",
+    path: "/projectEdit/:id",
     element: <ProjectEdit />,
   },
 ];

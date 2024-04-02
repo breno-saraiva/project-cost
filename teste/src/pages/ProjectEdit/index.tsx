@@ -5,7 +5,7 @@ function ProjectEdit() {
   const { id } = useParams();
   console.log(id);
 
-  const [project, setProject] = useState("");
+  const [project, setProject] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:5000/projects/${id}`, {
@@ -18,12 +18,9 @@ function ProjectEdit() {
       .then((data) => setProject(data))
       .catch((err) => console.log(err));
   }, [id]);
+  console.log(project);
 
-  return (
-    <div>
-      <p>editar projeto</p>
-    </div>
-  );
+  return project.map((item) => console.log(item));
 }
 
 export default ProjectEdit;
