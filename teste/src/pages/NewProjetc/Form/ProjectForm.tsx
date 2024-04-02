@@ -1,12 +1,12 @@
 import Select from "../components/select";
 import { Input } from "../components/input";
-import { SubmitButton } from "../components/button";
+import { ButtonProps, SubmitButton } from "../components/button";
 import { FormEvent, useEffect, useState } from "react";
 import { createProject } from "../../../api/createProject";
 import { getCategorias } from "../../../api/getCategorias";
 import { getCategoriasApiRes } from "../../../types";
 
-const ProjectForm = () => {
+const ProjectForm: React.FC<ButtonProps> = ({ text }) => {
   const [categories, setCategories] = useState<getCategoriasApiRes[]>([]);
   const [name, setName] = useState("");
   const [cost, setCost] = useState("");
@@ -55,7 +55,7 @@ const ProjectForm = () => {
         handlechange={(e) => setCategorie(e.target.value)}
         options={categories}
       />
-      <SubmitButton type="submit" text="criar projeto" />
+      <SubmitButton type="submit" text={text} />
     </form>
   );
 };

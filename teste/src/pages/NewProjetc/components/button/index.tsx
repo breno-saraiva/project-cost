@@ -1,6 +1,6 @@
 import React, { ButtonHTMLAttributes } from "react";
 
-type ButtonProps = {
+export type ButtonProps = {
   text: string;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
