@@ -1,25 +1,27 @@
 import Select from "../components/select";
 import { Input } from "../components/input";
-import { ButtonProps, SubmitButton } from "../components/button";
+import { SubmitButton } from "../components/button";
 import { FormEvent, useEffect, useState } from "react";
 import { createProject } from "../../../api/createProject";
 import { getCategorias } from "../../../api/getCategorias";
 import { getCategoriasApiRes } from "../../../types";
 
-const ProjectForm: React.FC<ButtonProps> = ({ text }) => {
+type ProjectFormProps = {
+  textBtn?: string;
+  selValue?: string;
+  textOrçamento?: string;
+  projectName?: string;
+  onSubmit?: () => void;
+};
+
+const ProjectForm: React.FC<ProjectFormProps> = ({
+  textBtn,
+  selValue,
+  textOrçamento,
+  projectName,
+  onSubmit,
+}) => {
   const [categories, setCategories] = useState<getCategoriasApiRes[]>([]);
-  const [name, setName] = useState("");
-  const [cost, setCost] = useState("");
-  const [categorie, setCategorie] = useState("");
-
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const nome = name;
-    const orcamento = cost;
-    const categoria = categorie;
-
-    await createProject({ categoria, nome, orcamento });
-  }
 
   useEffect(() => {
     const getCategories = async () => {
@@ -30,32 +32,32 @@ const ProjectForm: React.FC<ButtonProps> = ({ text }) => {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit} className="w-full flex flex-col py-8 px-0">
+    <form onSubmit={onSubmit} className="w-full flex flex-col py-8 px-0">
       <div>
         <Input
           type="text"
-          text="nome do projeto"
+          text="criar projeto"
           name="name"
           handleOnChange={(e) => setName(e.target.value)}
-          placeholder="Insira o nome do projeto"
+          placeholder={projectName}
         />
       </div>
       <div>
         <Input
           type="number"
-          text="Orçamento do Projeto"
+          text="criar orçamento"
           name="budget"
           handleOnChange={(e) => setCost(e.target.value)}
-          placeholder="Insira o orçamento total"
+          placeholder={textOrçamento}
         />
       </div>
       <Select
         name="category"
-        text="Selecione a Categoria"
+        text={selValue}
         handlechange={(e) => setCategorie(e.target.value)}
         options={categories}
       />
-      <SubmitButton type="submit" text={text} />
+      <SubmitButton type="submit" text={textBtn} />
     </form>
   );
 };

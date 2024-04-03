@@ -1,7 +1,7 @@
 import React, { ButtonHTMLAttributes } from "react";
 
 export type ButtonProps = {
-  text: string;
+  text?: string;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const SubmitButton: React.FC<ButtonProps> = ({ text, ...rest }) => {

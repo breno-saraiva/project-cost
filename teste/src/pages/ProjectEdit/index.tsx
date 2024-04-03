@@ -23,7 +23,10 @@ function ProjectEdit() {
       .then((data) => setProject(data))
       .catch((err) => console.log(err));
   }, [id]);
-  console.log(project);
+
+  function editPost(project) {
+    //
+  }
 
   function toggleProjectForm() {
     setShowProjectForm(!showProjectForm);
@@ -67,7 +70,12 @@ function ProjectEdit() {
             </div>
           ) : (
             <div>
-              <ProjectForm text="Editar" />
+              <ProjectForm
+                projectName={project?.nome}
+                textOrçamento={project?.orcamento}
+                selValue={project?.categoria}
+                textBtn="Editar"
+              />
             </div>
           )}
         </div>

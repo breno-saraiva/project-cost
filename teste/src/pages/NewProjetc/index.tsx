@@ -17,7 +17,12 @@ function NewProject() {
         <p className="text-[#7b7b7b]">
           Crie seu projeto para depois adicionar os serviços
         </p>
-        <ProjectForm text="criar projeto" />
+        <ProjectForm
+          projectName="insira o nome do porjeto"
+          textOrçamento="insira o orçamento total"
+          selValue="selecione a categoria"
+          textBtn="criar"
+        />
       </div>
       <Footer />
     </div>
