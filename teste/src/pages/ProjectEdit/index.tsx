@@ -4,11 +4,14 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { listProjectProps } from "../../api/listProjects";
 import { ProjectForm } from "../NewProjetc/Form/ProjectForm";
+import { getCategorias } from "../../api/getCategorias";
+import { getCategoriasApiRes } from "../../types";
 
 function ProjectEdit() {
   const { id } = useParams();
   console.log(id);
 
+  const [categories, setCategories] = useState<getCategoriasApiRes[]>([]);
   const [project, setProject] = useState<listProjectProps>();
   const [showProjectForm, setShowProjectForm] = useState(false);
 
@@ -24,13 +27,21 @@ function ProjectEdit() {
       .catch((err) => console.log(err));
   }, [id]);
 
-  function editPost(project) {
-    //
-  }
+  // function editPost(project) {
+
+  // }
 
   function toggleProjectForm() {
     setShowProjectForm(!showProjectForm);
   }
+
+  useEffect(() => {
+    const getCategories = async () => {
+      const categorias = await getCategorias();
+      setCategories(categorias);
+    };
+    getCategories();
+  }, []);
 
   return (
     <div>
@@ -71,10 +82,12 @@ function ProjectEdit() {
           ) : (
             <div>
               <ProjectForm
+                onSubmit={}
                 projectName={project?.nome}
                 textOrçamento={project?.orcamento}
                 selValue={project?.categoria}
                 textBtn="Editar"
+                categoria={categories}
               />
             </div>
           )}

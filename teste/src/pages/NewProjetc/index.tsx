@@ -1,6 +1,10 @@
 import Navbar from "../../components/navbar";
 import Footer from "../../components/Footer";
 import { ProjectForm } from "./Form/ProjectForm";
+import { useEffect, useState } from "react";
+import { getCategorias } from "../../api/getCategorias";
+import { createProject } from "../../api/createProject";
+import { getCategoriasApiRes } from "../../types";
 // import { useNavigate } from "react-router-dom";
 
 export type projectProps = {
@@ -9,6 +13,20 @@ export type projectProps = {
 };
 
 function NewProject() {
+  const [categories, setCategories] = useState<getCategoriasApiRes[]>([]);
+
+  async function handleSubmit() {
+    await createProject({ categoria, nome, orcamento });
+  }
+
+  useEffect(() => {
+    const getCategories = async () => {
+      const categorias = await getCategorias();
+      setCategories(categorias);
+    };
+    getCategories();
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -18,10 +36,12 @@ function NewProject() {
           Crie seu projeto para depois adicionar os serviços
         </p>
         <ProjectForm
+          onSubmit={handleSubmit}
           projectName="insira o nome do porjeto"
           textOrçamento="insira o orçamento total"
           selValue="selecione a categoria"
           textBtn="criar"
+          categoria={categories}
         />
       </div>
       <Footer />
