@@ -13,19 +13,19 @@ export type projectProps = {
 };
 
 function NewProject() {
-  const [categories, setCategories] = useState<getCategoriasApiRes[]>([]);
+  const [data, setData] = useState({
+    name: "",
+    category: "",
+    cost: "",
+  });
 
-  async function handleSubmit() {
-    await createProject({ categoria, nome, orcamento });
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const nome = name;
+    const categoria = category;
+    const orcamento = cost;
+    await createProject(data);
   }
-
-  useEffect(() => {
-    const getCategories = async () => {
-      const categorias = await getCategorias();
-      setCategories(categorias);
-    };
-    getCategories();
-  }, []);
 
   return (
     <div>
@@ -41,7 +41,6 @@ function NewProject() {
           textOrçamento="insira o orçamento total"
           selValue="selecione a categoria"
           textBtn="criar"
-          categoria={categories}
         />
       </div>
       <Footer />

@@ -1,14 +1,15 @@
 import Select from "../components/select";
 import { Input } from "../components/input";
 import { SubmitButton } from "../components/button";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { getCategorias } from "../../../api/getCategorias";
+import { getCategoriasApiRes } from "../../../types";
 
 type ProjectFormProps = {
   textBtn?: string;
   selValue?: string;
   textOrçamento?: string;
   projectName?: string;
-  categoria?: { id: string; name: string }[];
   onSubmit?: () => void;
 };
 
@@ -17,53 +18,37 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
   selValue,
   textOrçamento,
   projectName,
-  categoria,
+  onSubmit,
 }) => {
-  type FormFields = {
-    nome: string;
-    orcamento: string;
-    categoria: string;
-  };
+  const [categories, setCategories] = useState<getCategoriasApiRes[]>([]);
 
-  const form = useForm<FormFields>();
-
-  const onSubmit: SubmitHandler<FormFields> = () => {
-    console.log(form.getValues());
-  };
-
-  const sub = (data: FormFields) => {
-    console.log(data, "dataa----------------- ");
-  };
+  useEffect(() => {
+    const getCategories = async () => {
+      const categorias = await getCategorias();
+      setCategories(categorias);
+    };
+    getCategories();
+  }, []);
 
   return (
-    <form
-      onSubmit={form.handleSubmit((data) => sub(data))}
-      className="w-full flex flex-col py-8 px-0"
-    >
+    <form onSubmit={onSubmit} className="w-full flex flex-col py-8 px-0">
       <div>
         <Input
-          {...form.register("nome")}
           type="text"
           text="criar projeto"
           name="name"
-          placeholder={projectName}
+          value={projectName}
         />
       </div>
       <div>
         <Input
-          {...form.register("orcamento")}
           type="number"
           text="criar orçamento"
           name="budget"
-          placeholder={textOrçamento}
+          value={textOrçamento}
         />
       </div>
-      <Select
-        {...form.register("categoria")}
-        name="category"
-        text={selValue}
-        options={categoria}
-      />
+      <Select value={selValue} options={categories} />
       <SubmitButton type="submit" text={textBtn} />
     </form>
   );
