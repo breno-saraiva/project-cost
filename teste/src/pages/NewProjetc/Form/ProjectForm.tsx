@@ -1,7 +1,7 @@
 import Select from "../components/select";
 import { Input } from "../components/input";
 import { SubmitButton } from "../components/button";
-import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 type ProjectFormProps = {
   textBtn?: string;
@@ -9,7 +9,7 @@ type ProjectFormProps = {
   textOrçamento?: string;
   projectName?: string;
   categoria?: { id: string; name: string }[];
-  onSubmit: () => void;
+  onSubmit?: () => void;
 };
 
 const ProjectForm: React.FC<ProjectFormProps> = ({
@@ -18,48 +18,50 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
   textOrçamento,
   projectName,
   categoria,
-  onSubmit,
-  value:
 }) => {
-  const [name, setName] = useState("");
-  const [cost, setCost] = useState("");
-  const [categorie, setCategorie] = useState("");
-
-  type PropFormProp = {
+  type FormFields = {
     nome: string;
     orcamento: string;
     categoria: string;
   };
-  const value = {
-    nome: name,
-    orcamento: cost,
-    categoria: categorie,
+
+  const form = useForm<FormFields>();
+
+  const onSubmit: SubmitHandler<FormFields> = () => {
+    console.log(form.getValues());
+  };
+
+  const sub = (data: FormFields) => {
+    console.log(data, "dataa----------------- ");
   };
 
   return (
-    <form onSubmit={onSubmit} className="w-full flex flex-col py-8 px-0">
+    <form
+      onSubmit={form.handleSubmit((data) => sub(data))}
+      className="w-full flex flex-col py-8 px-0"
+    >
       <div>
         <Input
+          {...form.register("nome")}
           type="text"
           text="criar projeto"
           name="name"
-          handleOnChange={(e) => setName(e.target.value)}
           placeholder={projectName}
         />
       </div>
       <div>
         <Input
+          {...form.register("orcamento")}
           type="number"
           text="criar orçamento"
           name="budget"
-          handleOnChange={(e) => setCost(e.target.value)}
           placeholder={textOrçamento}
         />
       </div>
       <Select
+        {...form.register("categoria")}
         name="category"
         text={selValue}
-        handlechange={(e) => setCategorie(e.target.value)}
         options={categoria}
       />
       <SubmitButton type="submit" text={textBtn} />

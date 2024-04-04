@@ -82,7 +82,6 @@ function ProjectEdit() {
           ) : (
             <div>
               <ProjectForm
-                onSubmit={}
                 projectName={project?.nome}
                 textOrçamento={project?.orcamento}
                 selValue={project?.categoria}
