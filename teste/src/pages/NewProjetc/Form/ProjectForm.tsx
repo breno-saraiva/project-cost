@@ -3,24 +3,21 @@ import { Input } from "../components/input";
 import { SubmitButton } from "../components/button";
 import { useEffect, useState } from "react";
 import { getCategorias } from "../../../api/getCategorias";
-import { getCategoriasApiRes } from "../../../types";
+import { getCategoriasApiRes, projectType } from "../../../types";
 
 type ProjectFormProps = {
   textBtn?: string;
-  selValue?: string;
-  textOrçamento?: string;
-  projectName?: string;
-  onSubmit?: () => void;
+  projectData?: projectType;
+  onSubmit: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const ProjectForm: React.FC<ProjectFormProps> = ({
   textBtn,
-  selValue,
-  textOrçamento,
-  projectName,
   onSubmit,
+  projectData,
 }) => {
   const [categories, setCategories] = useState<getCategoriasApiRes[]>([]);
+  const [project, setProject] = useState(projectData);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -30,25 +27,37 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
     getCategories();
   }, []);
 
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSubmit(project);
+  };
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setProject({ ...project, [e.target.name]: e.target.name });
+    console.log(project);
+  }
+
   return (
-    <form onSubmit={onSubmit} className="w-full flex flex-col py-8 px-0">
+    <form onSubmit={submit} className="w-full flex flex-col py-8 px-0">
       <div>
         <Input
+          handleOnChange={handleChange}
           type="text"
-          text="criar projeto"
+          text="nome do projeto"
           name="name"
-          value={projectName}
+          placeholder="Insira o nome do projeto"
         />
       </div>
       <div>
         <Input
+          handleOnChange={handleChange}
           type="number"
-          text="criar orçamento"
+          text="orçamento do projeto"
           name="budget"
-          value={textOrçamento}
+          placeholder="Insira o orçamento total"
         />
       </div>
-      <Select value={selValue} options={categories} />
+      <Select options={categories} />
       <SubmitButton type="submit" text={textBtn} />
     </form>
   );

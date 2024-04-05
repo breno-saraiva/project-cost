@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../../src/img/costs_logo.png";
 
-function navbar() {
+function Navbar() {
   return (
     <nav className="flex items-center justify-between py-4 px-6 bg-[#222] p-4 text-white">
       <div>
@@ -12,7 +12,7 @@ function navbar() {
       <div>
         <ul className="flex ">
           <li className="mr-4 hover:text-[#FFBB33]">
-            <Link to="/">Home</Link>
+            <Link to="/home">Home</Link>
           </li>
           <li className="mr-4 hover:text-[#FFBB33]">
             <Link to="/contato">contato</Link>
@@ -29,4 +29,4 @@ function navbar() {
   );
 }
 
-export default navbar;
+export { Navbar };

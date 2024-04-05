@@ -1,12 +1,9 @@
-import Footer from "../../components/Footer";
 import { Linkbutton } from "./components/LinkButton";
-import Navbar from "../../components/navbar";
 import savings from "../../img/savings.svg";
 
 function Home() {
   return (
     <div>
-      <Navbar />
       <section className="w-full flex flex-col justify-center items-center text-center p-16">
         <h1 className="mb-8 text-5xl font-sans font-bold px-0 py-[0.2em]">
           Bem-vindo ao{" "}
@@ -18,7 +15,6 @@ function Home() {
         <Linkbutton to="/newProject" text="Criar projeto" />
         <img src={savings} alt="Costs" className="w-[350px] my-8 mx-0" />
       </section>
-      <Footer />
     </div>
   );
 }
