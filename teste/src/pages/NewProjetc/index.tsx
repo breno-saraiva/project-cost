@@ -1,8 +1,6 @@
 import { ProjectForm } from "./Form/ProjectForm";
-import { useEffect, useState } from "react";
-import { getCategorias } from "../../api/getCategorias";
+import { useState } from "react";
 import { createProject } from "../../api/createProject";
-import { getCategoriasApiRes } from "../../types";
 // import { useNavigate } from "react-router-dom";
 
 export type projectProps = {

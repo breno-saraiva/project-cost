@@ -1,7 +1,7 @@
 export type projectType = {
   nome: string;
   orcamento: string;
-  categoria: string;
+  categoria: { name: string; id: string }[];
 };
 
 export type getCategoriasApiRes = {

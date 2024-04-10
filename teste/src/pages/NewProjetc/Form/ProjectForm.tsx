@@ -1,23 +1,23 @@
 import Select from "../components/select";
 import { Input } from "../components/input";
 import { SubmitButton } from "../components/button";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getCategorias } from "../../../api/getCategorias";
 import { getCategoriasApiRes, projectType } from "../../../types";
 
 type ProjectFormProps = {
   textBtn?: string;
   projectData?: projectType;
-  onSubmit: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit?: (e: React.FormEvent) => void;
 };
 
 const ProjectForm: React.FC<ProjectFormProps> = ({
   textBtn,
-  onSubmit,
   projectData,
+  // handleSubmit,
 }) => {
   const [categories, setCategories] = useState<getCategoriasApiRes[]>([]);
-  const [project, setProject] = useState(projectData);
+  const [project, setProject] = useState(projectData || {});
 
   useEffect(() => {
     const getCategories = async () => {
@@ -29,12 +29,28 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(project);
+    // handleSubmit(project);
   };
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setProject({ ...project, [e.target.name]: e.target.name });
-    console.log(project);
+    e.persist();
+    setProject({ ...project, [e.target.name]: e.target.value });
+  }
+
+  function handleCategory(e: React.ChangeEvent<HTMLSelectElement>) {
+    const categoryId = e.target.value;
+    const selectedCategory = categories.find(
+      (category) => category.id === categoryId
+    );
+    if (selectedCategory) {
+      setProject((prevState) => ({
+        ...prevState,
+        categories: {
+          id: categoryId,
+          name: selectedCategory.name,
+        },
+      }));
+    }
   }
 
   return (
@@ -53,11 +69,11 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
           handleOnChange={handleChange}
           type="number"
           text="orçamento do projeto"
-          name="budget"
+          name="orçamento"
           placeholder="Insira o orçamento total"
         />
       </div>
-      <Select options={categories} />
+      <Select options={categories} handleOnchange={handleCategory} />
       <SubmitButton type="submit" text={textBtn} />
     </form>
   );
