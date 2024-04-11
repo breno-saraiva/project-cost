@@ -42,9 +42,9 @@ function Project() {
             projects.map((project) => (
               <CardProject
                 id={project.id}
-                nome={project.nome}
-                orcamento={project.orcamento}
-                categoria={project.categoria}
+                nome={project.name}
+                orcamento={project.orçamento}
+                categoria={project.categories}
                 key={project.id}
                 handleRemove={deleteItem}
               />

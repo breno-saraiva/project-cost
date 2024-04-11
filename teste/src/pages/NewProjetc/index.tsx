@@ -1,7 +1,6 @@
 import { ProjectForm } from "./Form/ProjectForm";
-import { useState } from "react";
+import { projectType } from "../../types/index";
 import { createProject } from "../../api/createProject";
-// import { useNavigate } from "react-router-dom";
 
 export type projectProps = {
   cost?: number;
@@ -9,18 +8,8 @@ export type projectProps = {
 };
 
 function NewProject() {
-  const [data, setData] = useState({
-    name: "",
-    category: "",
-    cost: "",
-  });
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    const nome = data.name;
-    const categoria = data.category;
-    const orcamento = data.cost;
-    await createProject({ nome, categoria, orcamento });
+  async function handleSubmit(data: projectType) {
+    await createProject(data);
   }
 
   return (
@@ -29,7 +18,7 @@ function NewProject() {
       <p className="text-[#7b7b7b]">
         Crie seu projeto para depois adicionar os serviços
       </p>
-      <ProjectForm onSubmit={handleSubmit} textBtn="criar" />
+      <ProjectForm handleOnSubmit={(e) => handleSubmit(e)} textBtn="criar" />
     </div>
   );
 }

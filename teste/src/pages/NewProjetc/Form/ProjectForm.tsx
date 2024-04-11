@@ -8,13 +8,13 @@ import { getCategoriasApiRes, projectType } from "../../../types";
 type ProjectFormProps = {
   textBtn?: string;
   projectData?: projectType;
-  handleSubmit?: (e: React.FormEvent) => void;
+  handleOnSubmit: (e: projectType) => void;
 };
 
 const ProjectForm: React.FC<ProjectFormProps> = ({
   textBtn,
   projectData,
-  // handleSubmit,
+  handleOnSubmit,
 }) => {
   const [categories, setCategories] = useState<getCategoriasApiRes[]>([]);
   const [project, setProject] = useState(projectData || {});
@@ -29,7 +29,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    // handleSubmit(project);
+    handleOnSubmit(project as projectType);
   };
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {

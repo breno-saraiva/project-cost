@@ -34,7 +34,7 @@ function ProjectEdit() {
         <div className="flex justify-between">
           <h1 className="mb-4 text-5xl font-sans font-bold">
             <span className="bg-[#222] text-[#ffbb33]">Projeto:</span>{" "}
-            {project?.nome}
+            {project?.name}
           </h1>
           <button
             className="border-2 rounded-md w-32 bg-[#222] text-white hover:text-[#ffbb33]"
@@ -48,7 +48,7 @@ function ProjectEdit() {
             <p>
               <span className="text-2xl font-bold text-[#222]">Categoria:</span>{" "}
               <span className="text-xl font-medium text-[#7a7a7a]">
-                {project?.categoria}
+                {project?.categories.nome}
               </span>
             </p>
             <p>
@@ -56,13 +56,13 @@ function ProjectEdit() {
                 Total de Orçamento:
               </span>{" "}
               <span className="text-xl font-medium text-[#7a7a7a]">
-                {project?.orcamento}
+                {project?.orçamento}
               </span>
             </p>
           </div>
         ) : (
           <div>
-            <ProjectForm onSubmit={editPost} textBtn="Editar" />
+            <ProjectForm handleOnSubmit={editPost} textBtn="Editar" />
           </div>
         )}
       </div>
