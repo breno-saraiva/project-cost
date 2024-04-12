@@ -22,7 +22,21 @@ function ProjectEdit() {
       .catch((err) => console.log(err));
   }, [id]);
 
-  function editPost(project) {}
+  function editPost(project: listProjectProps) {
+    fetch(`http://localhost:5000/projects/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(project),
+    })
+      .then((resp) => resp.json())
+      .then(() => {
+        setProject(project);
+        setShowProjectForm(!showProjectForm);
+      })
+      .catch((err) => console.log(err));
+  }
 
   function toggleProjectForm() {
     setShowProjectForm(!showProjectForm);
@@ -48,7 +62,7 @@ function ProjectEdit() {
             <p>
               <span className="text-2xl font-bold text-[#222]">Categoria:</span>{" "}
               <span className="text-xl font-medium text-[#7a7a7a]">
-                {project?.categories.nome}
+                {project?.categories.name}
               </span>
             </p>
             <p>
@@ -62,7 +76,7 @@ function ProjectEdit() {
           </div>
         ) : (
           <div>
-            <ProjectForm handleOnSubmit={editPost} textBtn="Editar" />
+            <ProjectForm handleOnSubmit={(e) => editPost(e)} textBtn="Editar" />
           </div>
         )}
       </div>

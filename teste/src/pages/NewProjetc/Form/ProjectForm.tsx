@@ -4,11 +4,12 @@ import { SubmitButton } from "../components/button";
 import React, { useEffect, useState } from "react";
 import { getCategorias } from "../../../api/getCategorias";
 import { getCategoriasApiRes, projectType } from "../../../types";
+import { listProjectProps } from "../../../api/listProjects";
 
 type ProjectFormProps = {
   textBtn?: string;
   projectData?: projectType;
-  handleOnSubmit: (e: projectType) => void;
+  handleOnSubmit: (e: listProjectProps) => void;
 };
 
 const ProjectForm: React.FC<ProjectFormProps> = ({
@@ -29,7 +30,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    handleOnSubmit(project as projectType);
+    handleOnSubmit(project as listProjectProps);
   };
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {

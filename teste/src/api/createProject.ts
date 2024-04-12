@@ -1,7 +1,6 @@
-import { projectType } from "../types";
+import { listProjectProps } from "./listProjects";
 
-
-export const createProject = async (project: projectType ) => {
+export const createProject = async (project: listProjectProps) => {
   await fetch("http://localhost:5000/projects", {
     method: "POST",
     headers: {

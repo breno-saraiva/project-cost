@@ -6,7 +6,7 @@ type cardProjectProps = {
   id?: string;
   nome?: string;
   orcamento?: string;
-  categoria?: { nome: string; id: string };
+  categoria?: { name: string; id: string };
   handleRemove?: (id: string) => void;
 };
 
@@ -32,7 +32,7 @@ const CardProject: React.FC<cardProjectProps> = ({
         {orcamento}
       </p>
       <p className="text-[#7a7a7a] mb-4 flex items-center">
-        <span className="font-bold block">Categoria: </span> {categoria?.nome}
+        <span className="font-bold block">Categoria: </span> {categoria?.name}
       </p>
       <div className="flex justify-between items-center mt-5">
         <Link to={`/projectEdit/${id}`} className="text-xl">

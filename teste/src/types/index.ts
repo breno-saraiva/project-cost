@@ -1,4 +1,5 @@
 export type projectType = {
+  id: string;
   nome: string;
   orcamento: string;
   categoria: { name: string; id: string };

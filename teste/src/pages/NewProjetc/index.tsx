@@ -1,6 +1,6 @@
 import { ProjectForm } from "./Form/ProjectForm";
-import { projectType } from "../../types/index";
 import { createProject } from "../../api/createProject";
+import { listProjectProps } from "../../api/listProjects";
 
 export type projectProps = {
   cost?: number;
@@ -8,7 +8,7 @@ export type projectProps = {
 };
 
 function NewProject() {
-  async function handleSubmit(data: projectType) {
+  async function handleSubmit(data: listProjectProps) {
     await createProject(data);
   }
 
